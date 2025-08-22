@@ -33,6 +33,6 @@ class CaseState(initialCase: Case) {
 
     companion object {
         @Composable
-        fun rememberCaseState(initialCase: Case = Case.Problem) = remember { mutableStateOf(CaseState(initialCase)) }
+        fun rememberCaseState(initialCase: Case = Case.Problem) = remember { CaseState(initialCase) }
     }
 }
