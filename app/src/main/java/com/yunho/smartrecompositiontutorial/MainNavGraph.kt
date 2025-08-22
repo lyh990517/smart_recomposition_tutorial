@@ -5,12 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.yunho.smartrecompositiontutorial.cases.DonutHoleSkipping
-import com.yunho.smartrecompositiontutorial.cases.OptimizedCalculation
-import com.yunho.smartrecompositiontutorial.cases.PositionalMemoization
-import com.yunho.smartrecompositiontutorial.cases.StateLoop
+import com.yunho.smartrecompositiontutorial.cases.donutHoleSkipping
+import com.yunho.smartrecompositiontutorial.cases.optimizedCalculation
+import com.yunho.smartrecompositiontutorial.cases.positionalMemoization
+import com.yunho.smartrecompositiontutorial.cases.stateLoop
 
 @Composable
 fun MainNavGraph(
@@ -21,35 +20,10 @@ fun MainNavGraph(
         navController = navController,
         startDestination = Root
     ) {
-        composable<Root> {
-            Root(
-                navController = navController,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-
-        composable<OptimizedCalculation> {
-            OptimizedCalculation(
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-
-        composable<StateLoop> {
-            StateLoop(
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-
-        composable<PositionalMemoization> {
-            PositionalMemoization(
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-
-        composable<DonutHoleSkipping> {
-            DonutHoleSkipping(
-                modifier = Modifier.fillMaxSize()
-            )
-        }
+        root(navController)
+        optimizedCalculation()
+        stateLoop()
+        positionalMemoization()
+        donutHoleSkipping()
     }
 }

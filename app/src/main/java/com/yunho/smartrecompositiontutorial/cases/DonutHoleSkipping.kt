@@ -18,8 +18,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import com.yunho.smartrecompositiontutorial.PositionalMemoization
 import com.yunho.smartrecompositiontutorial.cases.base.Case
 import com.yunho.smartrecompositiontutorial.cases.base.CaseState
+
+fun NavGraphBuilder.donutHoleSkipping() {
+    composable<PositionalMemoization> {
+        PositionalMemoization(
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
 
 @Composable
 fun DonutHoleSkipping(

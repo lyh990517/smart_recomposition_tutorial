@@ -1,6 +1,7 @@
 package com.yunho.smartrecompositiontutorial.cases
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -10,8 +11,19 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import com.yunho.smartrecompositiontutorial.StateLoop
 import com.yunho.smartrecompositiontutorial.cases.base.Case
 import com.yunho.smartrecompositiontutorial.cases.base.CaseState
+
+fun NavGraphBuilder.stateLoop() {
+    composable<StateLoop> {
+        StateLoop(
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
 
 @Composable
 fun StateLoop(
