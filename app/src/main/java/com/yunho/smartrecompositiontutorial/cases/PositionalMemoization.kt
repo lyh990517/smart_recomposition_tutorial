@@ -2,18 +2,22 @@ package com.yunho.smartrecompositiontutorial.cases
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.yunho.smartrecompositiontutorial.Case
 
 private data class Item(
     val id: Int,
@@ -22,6 +26,35 @@ private data class Item(
 
 @Composable
 fun PositionalMemoization(
+    modifier: Modifier = Modifier
+) {
+    var case by remember { mutableStateOf(Case.PROBLEM) }
+
+    Column(modifier = modifier) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                onClick = {
+                    case = if (case == Case.PROBLEM) Case.SOLUTION else Case.PROBLEM
+                }
+            ) {
+                Text(if (case == Case.PROBLEM) "Show Solution" else "Show Problem")
+            }
+        }
+
+        when (case) {
+            Case.PROBLEM -> PositionalMemoizationProblem(modifier = Modifier.weight(1f))
+            Case.SOLUTION -> PositionalMemoizationSolution(modifier = Modifier.weight(1f))
+        }
+    }
+}
+
+@Composable
+private fun PositionalMemoizationProblem(
     modifier: Modifier = Modifier
 ) {
     val items = remember {
@@ -76,7 +109,7 @@ fun PositionalMemoization(
 }
 
 @Composable
-fun PositionalMemoizationSolution(
+private fun PositionalMemoizationSolution(
     modifier: Modifier = Modifier
 ) {
     val items = remember {
@@ -120,7 +153,7 @@ fun PositionalMemoizationSolution(
         ) {
             itemsIndexed(
                 items = items,
-                key = { _, item -> item.id },
+                key = { _, item -> item.id }
             ) { index, item ->
                 Text(
                     text = "${item.name} (ID: ${item.id}, Index: $index)",
