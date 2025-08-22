@@ -10,11 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 
-fun NavGraphBuilder.root(navController: NavHostController) {
-    composable<Root> {
+fun NavGraphBuilder.root(navController: NavController) {
+    composable<Route.Root> {
         Root(
             navController = navController,
             modifier = Modifier.fillMaxSize()
@@ -32,25 +31,12 @@ fun Root(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Button(
-            onClick = { navController.navigateToOptimizedCalculation() }
-        ) {
-            Text("OptimizedCalculation")
-        }
-        Button(
-            onClick = { navController.navigateToStateLoop() }
-        ) {
-            Text("StateLoop")
-        }
-        Button(
-            onClick = { navController.navigateToPositionalMemoization() }
-        ) {
-            Text("PositionalMemoization")
-        }
-        Button(
-            onClick = { navController.navigateToDonutHoleSkipping() }
-        ) {
-            Text("DonutHoleSkipping")
+        Route.Root.navigableRoutes.forEach { navigable ->
+            Button(
+                onClick = { with(navigable) { navController.navigate() } }
+            ) {
+                Text(text = navigable.label)
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.yunho.smartrecompositiontutorial.PositionalMemoization
+import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.cases.base.Case
 import com.yunho.smartrecompositiontutorial.cases.base.CaseState
 
@@ -26,7 +26,7 @@ private data class Item(
 )
 
 fun NavGraphBuilder.positionalMemoization() {
-    composable<PositionalMemoization> {
+    composable<Route.PositionalMemoization> {
         PositionalMemoization(
             modifier = Modifier.fillMaxSize()
         )

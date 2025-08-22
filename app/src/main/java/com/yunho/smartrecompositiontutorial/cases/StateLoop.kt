@@ -13,12 +13,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.yunho.smartrecompositiontutorial.StateLoop
+import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.cases.base.Case
 import com.yunho.smartrecompositiontutorial.cases.base.CaseState
 
 fun NavGraphBuilder.stateLoop() {
-    composable<StateLoop> {
+    composable<Route.StateLoop> {
         StateLoop(
             modifier = Modifier.fillMaxSize()
         )

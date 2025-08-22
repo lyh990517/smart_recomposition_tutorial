@@ -18,7 +18,7 @@ fun MainNavGraph(
     NavHost(
         modifier = Modifier.fillMaxSize(),
         navController = navController,
-        startDestination = Root
+        startDestination = Route.Root
     ) {
         root(navController)
         optimizedCalculation()
