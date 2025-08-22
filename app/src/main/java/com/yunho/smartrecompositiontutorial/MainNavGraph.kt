@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.yunho.smartrecompositiontutorial.cases.InefficientCalculation
+import com.yunho.smartrecompositiontutorial.cases.StateLoop
 
 @Composable
 fun MainNavGraph(
@@ -27,6 +28,12 @@ fun MainNavGraph(
 
         composable<Calculation> {
             InefficientCalculation(
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        composable<StateLoop> {
+            StateLoop(
                 modifier = Modifier.fillMaxSize()
             )
         }

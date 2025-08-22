@@ -11,3 +11,5 @@ data object Root : MainRoute
 @Serializable
 data object Calculation : MainRoute
 
+@Serializable
+data object StateLoop : MainRoute
