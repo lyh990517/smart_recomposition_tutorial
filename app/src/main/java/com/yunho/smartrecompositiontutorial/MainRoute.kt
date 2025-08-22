@@ -9,5 +9,5 @@ sealed interface MainRoute
 data object Root : MainRoute
 
 @Serializable
-data object Case1 : MainRoute
+data object Calculation : MainRoute
 
