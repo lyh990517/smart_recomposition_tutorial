@@ -10,28 +10,31 @@ import androidx.compose.runtime.setValue
 @Stable
 class CaseState(initialCase: Case) {
     var value by mutableStateOf(initialCase)
-    val buttonText: String get() = value.buttonText
+    val buttonText: String get() = value.toggled.label
 
     fun toggle() {
         value = value.toggled
     }
 
     sealed interface Case {
-        val buttonText: String
+        val label: String
         val toggled: Case
 
         data object Problem : Case {
-            override val buttonText: String = "Solution"
+            override val label: String = PROBLEM
             override val toggled: Case = Solution
         }
 
         data object Solution : Case {
-            override val buttonText: String = "Problem"
+            override val label: String = SOLUTION
             override val toggled: Case = Problem
         }
     }
 
     companion object {
+        private const val PROBLEM = "Problem"
+        private const val SOLUTION = "Solution"
+
         @Composable
         fun rememberCaseState(initialCase: Case = Case.Problem) = remember { CaseState(initialCase) }
     }
