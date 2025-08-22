@@ -16,3 +16,6 @@ data object StateLoop : MainRoute
 
 @Serializable
 data object PositionalMemoization : MainRoute
+
+@Serializable
+data object DonutHoleSkipping : MainRoute

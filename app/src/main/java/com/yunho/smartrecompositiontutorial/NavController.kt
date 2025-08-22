@@ -13,3 +13,7 @@ fun NavController.navigateToStateLoop() {
 fun NavController.navigateToPositionalMemoization() {
     navigate(PositionalMemoization)
 }
+
+fun NavController.navigateToDonutHoleSkipping() {
+    navigate(DonutHoleSkipping)
+}

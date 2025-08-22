@@ -34,5 +34,10 @@ fun Root(
         ) {
             Text("PositionalMemoization")
         }
+        Button(
+            onClick = { navController.navigateToDonutHoleSkipping() }
+        ) {
+            Text("DonutHoleSkipping")
+        }
     }
 }
