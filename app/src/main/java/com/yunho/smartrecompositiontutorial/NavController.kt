@@ -2,10 +2,14 @@ package com.yunho.smartrecompositiontutorial
 
 import androidx.navigation.NavController
 
-fun NavController.navigateToCalculation() {
-    navigate(Calculation)
+fun NavController.navigateToOptimizedCalculation() {
+    navigate(OptimizedCalculation)
 }
 
 fun NavController.navigateToStateLoop() {
     navigate(StateLoop)
+}
+
+fun NavController.navigateToPositionalMemoization() {
+    navigate(PositionalMemoization)
 }

@@ -7,7 +7,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.yunho.smartrecompositiontutorial.cases.InefficientCalculation
+import com.yunho.smartrecompositiontutorial.cases.OptimizedCalculation
+import com.yunho.smartrecompositiontutorial.cases.PositionalMemoization
 import com.yunho.smartrecompositiontutorial.cases.StateLoop
 
 @Composable
@@ -26,14 +27,20 @@ fun MainNavGraph(
             )
         }
 
-        composable<Calculation> {
-            InefficientCalculation(
+        composable<OptimizedCalculation> {
+            OptimizedCalculation(
                 modifier = Modifier.fillMaxSize()
             )
         }
 
         composable<StateLoop> {
             StateLoop(
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        composable<PositionalMemoization> {
+            PositionalMemoization(
                 modifier = Modifier.fillMaxSize()
             )
         }

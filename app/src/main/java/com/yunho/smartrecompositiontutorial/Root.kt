@@ -20,14 +20,19 @@ fun Root(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = { navController.navigateToCalculation() }
+            onClick = { navController.navigateToOptimizedCalculation() }
         ) {
-            Text("Calculation")
+            Text("OptimizedCalculation")
         }
         Button(
             onClick = { navController.navigateToStateLoop() }
         ) {
             Text("StateLoop")
+        }
+        Button(
+            onClick = { navController.navigateToPositionalMemoization() }
+        ) {
+            Text("PositionalMemoization")
         }
     }
 }

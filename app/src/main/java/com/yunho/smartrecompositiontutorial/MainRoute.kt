@@ -9,7 +9,10 @@ sealed interface MainRoute
 data object Root : MainRoute
 
 @Serializable
-data object Calculation : MainRoute
+data object OptimizedCalculation : MainRoute
 
 @Serializable
 data object StateLoop : MainRoute
+
+@Serializable
+data object PositionalMemoization : MainRoute

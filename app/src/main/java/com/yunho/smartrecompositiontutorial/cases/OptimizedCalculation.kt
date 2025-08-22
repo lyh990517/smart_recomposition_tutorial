@@ -13,7 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 
 @Composable
-fun InefficientCalculation(
+fun OptimizedCalculation(
     modifier: Modifier = Modifier
 ) {
     val itemList = List(10) { it }.sortedByDescending {
@@ -40,7 +40,7 @@ fun InefficientCalculation(
 }
 
 @Composable
-fun OptimizedCalculation(
+fun OptimizedCalculationSolution(
     modifier: Modifier = Modifier
 ) {
     val itemList = remember {
