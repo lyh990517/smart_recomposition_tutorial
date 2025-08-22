@@ -1,39 +1,21 @@
 package com.yunho.smartrecompositiontutorial.cases.base
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.yunho.smartrecompositiontutorial.cases.base.CaseState.Companion.rememberCaseState
+sealed interface Case {
+    val label: String
+    val toggled: Case
 
-@Composable
-fun Case(
-    modifier: Modifier = Modifier,
-    content: @Composable ColumnScope.(state: CaseState.Case) -> Unit = {}
-) {
-    val caseState = rememberCaseState()
+    data object Problem : Case {
+        override val label: String = PROBLEM
+        override val toggled: Case = Solution
+    }
 
-    Column(modifier = modifier) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.End
-        ) {
-            Button(
-                onClick = caseState::toggle
-            ) {
-                Text(text = caseState.buttonText)
-            }
-        }
+    data object Solution : Case {
+        override val label: String = SOLUTION
+        override val toggled: Case = Problem
+    }
 
-        content(caseState.value)
+    companion object {
+        private const val PROBLEM = "Problem"
+        private const val SOLUTION = "Solution"
     }
 }

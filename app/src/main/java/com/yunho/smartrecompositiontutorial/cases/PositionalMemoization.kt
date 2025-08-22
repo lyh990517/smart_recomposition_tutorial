@@ -18,7 +18,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.cases.base.Case
-import com.yunho.smartrecompositiontutorial.cases.base.CaseState
+import com.yunho.smartrecompositiontutorial.cases.base.Tutorial
 
 private data class Item(
     val id: Int,
@@ -37,15 +37,15 @@ fun NavGraphBuilder.positionalMemoization() {
 fun PositionalMemoization(
     modifier: Modifier = Modifier
 ) {
-    Case(modifier = modifier) { case ->
+    Tutorial(modifier = modifier) { case ->
         when (case) {
-            CaseState.Case.Problem -> Problem(
+            Case.Problem -> Problem(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
             )
 
-            CaseState.Case.Solution -> Solution(
+            Case.Solution -> Solution(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
