@@ -84,6 +84,17 @@ interface StableData6 {
     val value: Int // stable
 }
 
+/**
+ * Because we don't know what implementation will follow an interface,
+ * compose complier can't guarantee stability at compile time.
+ * Just because something can't be guaranteed doesn't mean it's unstable.
+ * Stability is determined at runtime.
+ */
+// runtime class
+data class UncertainData(
+    val data: StableData6 // uncertain
+)
+
 // stable class
 data class PresentationModel(
     val name: String, // stable
