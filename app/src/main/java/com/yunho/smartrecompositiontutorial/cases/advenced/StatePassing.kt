@@ -16,16 +16,16 @@ import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.base.Case
 import com.yunho.smartrecompositiontutorial.base.Tutorial
 
-fun NavGraphBuilder.stateDelegation() {
-    composable<Route.StateDelegation> {
-        StateDelegation(
+fun NavGraphBuilder.statePassing() {
+    composable<Route.StatePassing> {
+        StatePassing(
             modifier = Modifier.fillMaxSize()
         )
     }
 }
 
 @Composable
-fun StateDelegation(
+fun StatePassing(
     modifier: Modifier = Modifier
 ) {
     Tutorial(modifier = modifier) { case ->

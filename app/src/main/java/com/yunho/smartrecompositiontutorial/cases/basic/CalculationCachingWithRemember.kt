@@ -19,16 +19,16 @@ import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.base.Case
 import com.yunho.smartrecompositiontutorial.base.Tutorial
 
-fun NavGraphBuilder.optimizedCalculation() {
-    composable<Route.OptimizedCalculation> {
-        OptimizedCalculation(
+fun NavGraphBuilder.calculationCachingWithRemember() {
+    composable<Route.CalculationCachingWithRemember> {
+        CalculationCachingWithRemember(
             modifier = Modifier.fillMaxSize()
         )
     }
 }
 
 @Composable
-fun OptimizedCalculation(
+fun CalculationCachingWithRemember(
     modifier: Modifier = Modifier
 ) {
     Tutorial(modifier = modifier) { case ->

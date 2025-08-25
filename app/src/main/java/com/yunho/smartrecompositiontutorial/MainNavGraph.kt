@@ -11,11 +11,13 @@ import com.yunho.smartrecompositiontutorial.cases.advenced.contentType
 import com.yunho.smartrecompositiontutorial.cases.advenced.phaseSkipping
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateCalculationWithDerivedStateOf
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateCalculationWithSnapshotFlow
-import com.yunho.smartrecompositiontutorial.cases.advenced.stateDelegation
-import com.yunho.smartrecompositiontutorial.cases.advenced.stateDelegationUsingLambda
+import com.yunho.smartrecompositiontutorial.cases.advenced.StatePassing
+import com.yunho.smartrecompositiontutorial.cases.advenced.StatePassingWithLambda
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateHoisting
+import com.yunho.smartrecompositiontutorial.cases.advenced.statePassing
+import com.yunho.smartrecompositiontutorial.cases.advenced.statePassingWithLambda
+import com.yunho.smartrecompositiontutorial.cases.basic.calculationCachingWithRemember
 import com.yunho.smartrecompositiontutorial.cases.basic.donutHoleSkipping
-import com.yunho.smartrecompositiontutorial.cases.basic.optimizedCalculation
 import com.yunho.smartrecompositiontutorial.cases.basic.positionalMemoization
 import com.yunho.smartrecompositiontutorial.cases.basic.stateLoop
 
@@ -29,12 +31,12 @@ fun MainNavGraph(
         startDestination = Route.Root
     ) {
         root(navController)
-        optimizedCalculation()
+        calculationCachingWithRemember()
         stateLoop()
         positionalMemoization()
         donutHoleSkipping()
-        stateDelegation()
-        stateDelegationUsingLambda()
+        statePassing()
+        statePassingWithLambda()
         phaseSkipping()
         stateCalculationWithDerivedStateOf()
         stateCalculationWithSnapshotFlow()

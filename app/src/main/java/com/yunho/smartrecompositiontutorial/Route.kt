@@ -16,12 +16,12 @@ sealed interface Route {
     @Serializable
     data object Root : Route {
         val navigableRoutes: List<Navigable> = listOf(
-            OptimizedCalculation,
+            CalculationCachingWithRemember,
             StateLoop,
             PositionalMemoization,
             DonutHoleSkipping,
-            StateDelegation,
-            StateDelegationUsingLambda,
+            StatePassing,
+            StatePassingWithLambda,
             StateCalculationWithDerivedStateOf,
             StateCalculationWithSnapshotFlow,
             PhaseSkipping,
@@ -32,8 +32,8 @@ sealed interface Route {
     }
 
     @Serializable
-    data object OptimizedCalculation : Navigable {
-        override val label: String = "Optimized Calculation"
+    data object CalculationCachingWithRemember : Navigable {
+        override val label: String = "Calculation Caching With Remember"
     }
 
     @Serializable
@@ -52,13 +52,13 @@ sealed interface Route {
     }
 
     @Serializable
-    data object StateDelegation : Navigable {
-        override val label: String = "State Delegation"
+    data object StatePassing : Navigable {
+        override val label: String = "State Passing"
     }
 
     @Serializable
-    data object StateDelegationUsingLambda : Navigable {
-        override val label: String = "State Delegation Using Lambda"
+    data object StatePassingWithLambda : Navigable {
+        override val label: String = "State Passing With Lambda"
     }
 
     @Serializable
