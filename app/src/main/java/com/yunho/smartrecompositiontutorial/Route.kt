@@ -21,7 +21,7 @@ sealed interface Route {
             PositionalMemoization,
             DonutHoleSkipping,
             StatePassing,
-            StatePassingWithLambda,
+            DeferReadsAsLongAsPossible,
             StateCalculationWithDerivedStateOf,
             StateCalculationWithSnapshotFlow,
             PhaseSkipping,
@@ -57,8 +57,8 @@ sealed interface Route {
     }
 
     @Serializable
-    data object StatePassingWithLambda : Navigable {
-        override val label: String = "State Passing With Lambda"
+    data object DeferReadsAsLongAsPossible : Navigable {
+        override val label: String = "Defer Reads As Long As Possible"
     }
 
     @Serializable

@@ -17,16 +17,16 @@ import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.base.Case
 import com.yunho.smartrecompositiontutorial.base.Tutorial
 
-fun NavGraphBuilder.statePassingWithLambda() {
-    composable<Route.StatePassingWithLambda> {
-        StatePassingWithLambda(
+fun NavGraphBuilder.deferReadsAsLongAsPossible() {
+    composable<Route.DeferReadsAsLongAsPossible> {
+        DeferReadsAsLongAsPossible(
             modifier = Modifier.fillMaxSize()
         )
     }
 }
 
 @Composable
-fun StatePassingWithLambda(
+fun DeferReadsAsLongAsPossible(
     modifier: Modifier = Modifier
 ) {
     Tutorial(modifier = modifier) { case ->

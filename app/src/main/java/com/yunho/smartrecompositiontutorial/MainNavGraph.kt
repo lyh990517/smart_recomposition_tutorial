@@ -12,10 +12,11 @@ import com.yunho.smartrecompositiontutorial.cases.advenced.phaseSkipping
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateCalculationWithDerivedStateOf
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateCalculationWithSnapshotFlow
 import com.yunho.smartrecompositiontutorial.cases.advenced.StatePassing
-import com.yunho.smartrecompositiontutorial.cases.advenced.StatePassingWithLambda
+import com.yunho.smartrecompositiontutorial.cases.advenced.DeferReadsAsLongAsPossible
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateHoisting
 import com.yunho.smartrecompositiontutorial.cases.advenced.statePassing
-import com.yunho.smartrecompositiontutorial.cases.advenced.statePassingWithLambda
+import com.yunho.smartrecompositiontutorial.cases.advenced.DeferReadsAsLongAsPossible
+import com.yunho.smartrecompositiontutorial.cases.advenced.deferReadsAsLongAsPossible
 import com.yunho.smartrecompositiontutorial.cases.basic.calculationCachingWithRemember
 import com.yunho.smartrecompositiontutorial.cases.basic.donutHoleSkipping
 import com.yunho.smartrecompositiontutorial.cases.basic.positionalMemoization
@@ -37,7 +38,7 @@ fun MainNavGraph(
         positionalMemoization()
         donutHoleSkipping()
         statePassing()
-        statePassingWithLambda()
+        deferReadsAsLongAsPossible()
         phaseSkipping()
         stateCalculationWithDerivedStateOf()
         stateCalculationWithSnapshotFlow()
