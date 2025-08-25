@@ -15,6 +15,7 @@ import com.yunho.smartrecompositiontutorial.cases.basic.stateLoop
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateDelegation
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateDelegationUsingLambda
 import com.yunho.smartrecompositiontutorial.cases.advenced.phaseSkipping
+import com.yunho.smartrecompositiontutorial.cases.advenced.stateHoisting
 
 @Composable
 fun MainNavGraph(
@@ -35,5 +36,6 @@ fun MainNavGraph(
         phaseSkipping()
         stateCalculationWithDerivedStateOf()
         stateCalculationWithSnapshotFlow()
+        stateHoisting()
     }
 }

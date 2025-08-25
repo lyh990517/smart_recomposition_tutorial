@@ -24,7 +24,8 @@ sealed interface Route {
             StateDelegationUsingLambda,
             StateCalculationWithDerivedStateOf,
             StateCalculationWithSnapshotFlow,
-            PhaseSkipping
+            PhaseSkipping,
+            StateHoisting
         )
     }
 
@@ -71,5 +72,10 @@ sealed interface Route {
     @Serializable
     data object PhaseSkipping : Navigable {
         override val label: String = "Phase Skipping"
+    }
+
+    @Serializable
+    data object StateHoisting : Navigable {
+        override val label: String = "State Hoisting"
     }
 }
