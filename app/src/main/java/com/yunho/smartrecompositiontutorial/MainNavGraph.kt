@@ -17,6 +17,7 @@ import com.yunho.smartrecompositiontutorial.cases.advenced.stateDelegationUsingL
 import com.yunho.smartrecompositiontutorial.cases.advenced.phaseSkipping
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateHoisting
 import com.yunho.smartrecompositiontutorial.cases.advenced.classStabilityInference
+import com.yunho.smartrecompositiontutorial.cases.advenced.contentType
 
 @Composable
 fun MainNavGraph(
@@ -39,5 +40,6 @@ fun MainNavGraph(
         stateCalculationWithSnapshotFlow()
         stateHoisting()
         classStabilityInference()
+        contentType()
     }
 }
