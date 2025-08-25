@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -79,6 +81,17 @@ data class StableData5(
 interface StableData6 {
     val name: String // stable
     val value: Int // stable
+}
+
+// stable class
+data class PresentationModel(
+    val name: String, // stable
+    val value: Int // stable
+) {
+    constructor(dataModel: DataModel) : this(
+        name = dataModel.name + " mapped to presentation model",
+        value = dataModel.value
+    )
 }
 
 @Immutable
@@ -263,9 +276,17 @@ private fun Solution(
             value = 42,
         )
     }
+    val presentationModel = remember {
+        PresentationModel(
+            dataModel = DataModel(
+                name = "DataModel",
+                value = 42
+            )
+        )
+    }
 
     Column(
-        modifier = modifier,
+        modifier = modifier.verticalScroll(state = rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -320,6 +341,11 @@ private fun Solution(
 
         Immutable2(
             data = immutableData2,
+            modifier = Modifier.padding(8.dp)
+        )
+
+        PresentationModel(
+            data = presentationModel,
             modifier = Modifier.padding(8.dp)
         )
     }
@@ -585,5 +611,19 @@ private fun Immutable2(
                 Text(text = "change value")
             }
         }
+    }
+}
+
+@Composable
+private fun PresentationModel(
+    data: PresentationModel,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Stable: ${data.name}")
+        Text("Value: ${data.value}")
     }
 }
