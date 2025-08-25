@@ -27,8 +27,9 @@ import androidx.navigation.compose.composable
 import com.yunho.data.DataInterface
 import com.yunho.data.DataModel
 import com.yunho.smartrecompositiontutorial.Route
-import com.yunho.smartrecompositiontutorial.base.Case
 import com.yunho.smartrecompositiontutorial.base.Tutorial
+import com.yunho.smartrecompositiontutorial.base.Case.Problem as UnstableCase
+import com.yunho.smartrecompositiontutorial.base.Case.Solution as StableCase
 
 data class UnstableData1(
     val name: String, // stable
@@ -125,11 +126,11 @@ fun ClassStabilityInference(
 ) {
     Tutorial(modifier = modifier) { case ->
         when (case) {
-            Case.Problem -> Problem(
+            UnstableCase -> Unstable(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Case.Solution -> Solution(
+            StableCase -> Stable(
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -137,7 +138,7 @@ fun ClassStabilityInference(
 }
 
 @Composable
-private fun Problem(
+private fun Unstable(
     modifier: Modifier = Modifier
 ) {
     var counter by remember { mutableIntStateOf(0) }
@@ -220,7 +221,7 @@ private fun Problem(
 }
 
 @Composable
-private fun Solution(
+private fun Stable(
     modifier: Modifier = Modifier
 ) {
     var counter by remember { mutableIntStateOf(0) }
