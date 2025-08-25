@@ -31,7 +31,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-        // Compose Metrics 활성화
         freeCompilerArgs += listOf(
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" +
@@ -41,6 +40,10 @@ android {
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" +
                     project.buildDir.absolutePath + "/compose_compiler"
+        )
+        freeCompilerArgs += listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:experimentalStrongSkipping=false"
         )
     }
     buildFeatures {
