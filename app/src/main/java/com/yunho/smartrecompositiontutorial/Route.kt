@@ -25,7 +25,8 @@ sealed interface Route {
             StateCalculationWithDerivedStateOf,
             StateCalculationWithSnapshotFlow,
             PhaseSkipping,
-            StateHoisting
+            StateHoisting,
+            ClassStabilityInference
         )
     }
 
@@ -77,5 +78,10 @@ sealed interface Route {
     @Serializable
     data object StateHoisting : Navigable {
         override val label: String = "State Hoisting"
+    }
+
+    @Serializable
+    data object ClassStabilityInference : Navigable {
+        override val label: String = "Class Stability Inference"
     }
 }
