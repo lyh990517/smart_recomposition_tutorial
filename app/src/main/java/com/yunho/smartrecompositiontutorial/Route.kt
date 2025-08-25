@@ -19,7 +19,9 @@ sealed interface Route {
             OptimizedCalculation,
             StateLoop,
             PositionalMemoization,
-            DonutHoleSkipping
+            DonutHoleSkipping,
+            StateDelegation,
+            StateDelegationUsingLambda
         )
     }
 
@@ -41,5 +43,15 @@ sealed interface Route {
     @Serializable
     data object DonutHoleSkipping : Navigable {
         override val label: String = "Donut Hole Skipping"
+    }
+
+    @Serializable
+    data object StateDelegation : Navigable {
+        override val label: String = "State Delegation"
+    }
+
+    @Serializable
+    data object StateDelegationUsingLambda : Navigable {
+        override val label: String = "State Delegation Using Lambda"
     }
 }

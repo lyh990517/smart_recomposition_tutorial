@@ -6,10 +6,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.yunho.smartrecompositiontutorial.cases.donutHoleSkipping
-import com.yunho.smartrecompositiontutorial.cases.optimizedCalculation
-import com.yunho.smartrecompositiontutorial.cases.positionalMemoization
-import com.yunho.smartrecompositiontutorial.cases.stateLoop
+import com.yunho.smartrecompositiontutorial.cases.basic.donutHoleSkipping
+import com.yunho.smartrecompositiontutorial.cases.basic.optimizedCalculation
+import com.yunho.smartrecompositiontutorial.cases.basic.positionalMemoization
+import com.yunho.smartrecompositiontutorial.cases.basic.stateLoop
+import com.yunho.smartrecompositiontutorial.cases.stateDelegation
+import com.yunho.smartrecompositiontutorial.cases.stateDelegationUsingLambda
 
 @Composable
 fun MainNavGraph(
@@ -25,5 +27,7 @@ fun MainNavGraph(
         stateLoop()
         positionalMemoization()
         donutHoleSkipping()
+        stateDelegation()
+        stateDelegationUsingLambda()
     }
 }

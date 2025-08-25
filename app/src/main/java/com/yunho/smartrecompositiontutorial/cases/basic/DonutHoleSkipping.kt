@@ -1,8 +1,10 @@
-package com.yunho.smartrecompositiontutorial.cases
+package com.yunho.smartrecompositiontutorial.cases.basic
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,16 +19,16 @@ import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.cases.base.Case
 import com.yunho.smartrecompositiontutorial.cases.base.Tutorial
 
-fun NavGraphBuilder.stateLoop() {
-    composable<Route.StateLoop> {
-        StateLoop(
+fun NavGraphBuilder.donutHoleSkipping() {
+    composable<Route.DonutHoleSkipping> {
+        DonutHoleSkipping(
             modifier = Modifier.fillMaxSize()
         )
     }
 }
 
 @Composable
-fun StateLoop(
+fun DonutHoleSkipping(
     modifier: Modifier = Modifier
 ) {
     Tutorial(modifier = modifier) { case ->
@@ -50,15 +52,22 @@ fun StateLoop(
 private fun Problem(
     modifier: Modifier = Modifier
 ) {
-    var count by remember { mutableIntStateOf(0) }
+    val itemList = remember { List(10) { it } }
+    var recomposeCount by remember { mutableIntStateOf(0) }
 
     Box(modifier = modifier) {
-        Button(
-            onClick = { count++ }
-        ) {
-            Text(text = "$count")
+        println("read state on box : $recomposeCount")
 
-            count++ // don't change state on recomposition scope
+        LazyColumn {
+            items(items = itemList) {
+                Text(text = it.toString())
+            }
+        }
+
+        Button(
+            onClick = { recomposeCount++ }
+        ) {
+            Text(text = "recompose $recomposeCount")
         }
     }
 }
@@ -67,13 +76,22 @@ private fun Problem(
 private fun Solution(
     modifier: Modifier = Modifier
 ) {
-    var count by remember { mutableIntStateOf(0) }
+    val itemList = remember { List(10) { it } }
+    var recomposeCount by remember { mutableIntStateOf(0) }
 
     Box(modifier = modifier) {
+        LazyColumn {
+            items(items = itemList) {
+                Text(text = it.toString())
+            }
+        }
+
         Button(
-            onClick = { count++ }
+            onClick = { recomposeCount++ }
         ) {
-            Text(text = "$count")
+            println("read state only on button : $recomposeCount")
+
+            Text(text = "recompose $recomposeCount")
         }
     }
 }

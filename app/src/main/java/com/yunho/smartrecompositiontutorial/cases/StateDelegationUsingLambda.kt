@@ -1,11 +1,9 @@
 package com.yunho.smartrecompositiontutorial.cases
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,16 +17,16 @@ import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.cases.base.Case
 import com.yunho.smartrecompositiontutorial.cases.base.Tutorial
 
-fun NavGraphBuilder.donutHoleSkipping() {
-    composable<Route.DonutHoleSkipping> {
-        DonutHoleSkipping(
+fun NavGraphBuilder.stateDelegationUsingLambda() {
+    composable<Route.StateDelegationUsingLambda> {
+        StateDelegationUsingLambda(
             modifier = Modifier.fillMaxSize()
         )
     }
 }
 
 @Composable
-fun DonutHoleSkipping(
+fun StateDelegationUsingLambda(
     modifier: Modifier = Modifier
 ) {
     Tutorial(modifier = modifier) { case ->
@@ -52,23 +50,15 @@ fun DonutHoleSkipping(
 private fun Problem(
     modifier: Modifier = Modifier
 ) {
-    val itemList = remember { List(10) { it } }
-    var recomposeCount by remember { mutableIntStateOf(0) }
+    var count by remember { mutableIntStateOf(0) }
 
-    Box(modifier = modifier) {
-        println("read state on box : $recomposeCount")
+    Column(modifier = modifier) {
+        Text(
+            modifier = Modifier.clickable { count++ },
+            text = "click this"
+        )
 
-        LazyColumn {
-            items(items = itemList) {
-                Text(text = it.toString())
-            }
-        }
-
-        Button(
-            onClick = { recomposeCount++ }
-        ) {
-            Text(text = "recompose $recomposeCount")
-        }
+        ChildA(count = count)
     }
 }
 
@@ -76,22 +66,36 @@ private fun Problem(
 private fun Solution(
     modifier: Modifier = Modifier
 ) {
-    val itemList = remember { List(10) { it } }
-    var recomposeCount by remember { mutableIntStateOf(0) }
+    var count by remember { mutableIntStateOf(0) }
 
-    Box(modifier = modifier) {
-        LazyColumn {
-            items(items = itemList) {
-                Text(text = it.toString())
-            }
-        }
+    Column(modifier = modifier) {
+        Text(
+            modifier = Modifier.clickable { count++ },
+            text = "click this"
+        )
 
-        Button(
-            onClick = { recomposeCount++ }
-        ) {
-            println("read state only on button : $recomposeCount")
-
-            Text(text = "recompose $recomposeCount")
-        }
+        ChildB(count = { count })
     }
+}
+
+@Composable
+private fun ChildA(
+    count: Int,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        modifier = modifier,
+        text = "Count: $count"
+    )
+}
+
+@Composable
+private fun ChildB(
+    count: () -> Int,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        modifier = modifier,
+        text = "Count: ${count()}"
+    )
 }

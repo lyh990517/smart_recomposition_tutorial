@@ -1,4 +1,4 @@
-package com.yunho.smartrecompositiontutorial.cases
+package com.yunho.smartrecompositiontutorial.cases.basic
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
