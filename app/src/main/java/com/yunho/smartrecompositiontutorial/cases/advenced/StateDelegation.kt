@@ -1,4 +1,4 @@
-package com.yunho.smartrecompositiontutorial.cases
+package com.yunho.smartrecompositiontutorial.cases.advenced
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -6,27 +6,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.yunho.smartrecompositiontutorial.Route
-import com.yunho.smartrecompositiontutorial.cases.base.Case
-import com.yunho.smartrecompositiontutorial.cases.base.Tutorial
+import com.yunho.smartrecompositiontutorial.base.Case
+import com.yunho.smartrecompositiontutorial.base.Tutorial
 
-fun NavGraphBuilder.stateDelegationUsingLambda() {
-    composable<Route.StateDelegationUsingLambda> {
-        StateDelegationUsingLambda(
+fun NavGraphBuilder.stateDelegation() {
+    composable<Route.StateDelegation> {
+        StateDelegation(
             modifier = Modifier.fillMaxSize()
         )
     }
 }
 
 @Composable
-fun StateDelegationUsingLambda(
+fun StateDelegation(
     modifier: Modifier = Modifier
 ) {
     Tutorial(modifier = modifier) { case ->
@@ -50,15 +49,15 @@ fun StateDelegationUsingLambda(
 private fun Problem(
     modifier: Modifier = Modifier
 ) {
-    var count by remember { mutableIntStateOf(0) }
+    val count = remember { mutableIntStateOf(0) }
 
     Column(modifier = modifier) {
         Text(
-            modifier = Modifier.clickable { count++ },
+            modifier = Modifier.clickable { count.intValue++ },
             text = "click this"
         )
 
-        ChildA(count = count)
+        ChildA(count = count.intValue)
     }
 }
 
@@ -66,15 +65,16 @@ private fun Problem(
 private fun Solution(
     modifier: Modifier = Modifier
 ) {
-    var count by remember { mutableIntStateOf(0) }
+    val count = remember { mutableIntStateOf(0) }
 
     Column(modifier = modifier) {
         Text(
-            modifier = Modifier.clickable { count++ },
+            modifier = Modifier.clickable { count.intValue++ },
             text = "click this"
         )
 
-        ChildB(count = { count })
+        ChildB(count = count)
+        ChildC(count = count)
     }
 }
 
@@ -91,11 +91,22 @@ private fun ChildA(
 
 @Composable
 private fun ChildB(
-    count: () -> Int,
+    count: State<Int>,
     modifier: Modifier = Modifier
 ) {
     Text(
         modifier = modifier,
-        text = "Count: ${count()}"
+        text = "Count: ${count.value}"
+    )
+}
+
+@Composable
+private fun ChildC(
+    count: State<Int>,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        modifier = modifier,
+        text = "Count: $count"
     )
 }

@@ -1,4 +1,4 @@
-package com.yunho.smartrecompositiontutorial.cases.base
+package com.yunho.smartrecompositiontutorial.base
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable

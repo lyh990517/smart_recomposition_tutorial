@@ -1,4 +1,4 @@
-package com.yunho.smartrecompositiontutorial.cases.base
+package com.yunho.smartrecompositiontutorial.base
 
 sealed interface Case {
     val label: String

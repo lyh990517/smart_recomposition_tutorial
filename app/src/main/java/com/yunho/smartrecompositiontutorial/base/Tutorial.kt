@@ -1,4 +1,4 @@
-package com.yunho.smartrecompositiontutorial.cases.base
+package com.yunho.smartrecompositiontutorial.base
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.yunho.smartrecompositiontutorial.cases.base.CaseState.Companion.rememberCaseState
+import com.yunho.smartrecompositiontutorial.base.CaseState.Companion.rememberCaseState
 
 @Composable
 fun Tutorial(

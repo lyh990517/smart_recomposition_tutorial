@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.yunho.smartrecompositiontutorial.Route
-import com.yunho.smartrecompositiontutorial.cases.base.Case
-import com.yunho.smartrecompositiontutorial.cases.base.Tutorial
+import com.yunho.smartrecompositiontutorial.base.Case
+import com.yunho.smartrecompositiontutorial.base.Tutorial
 
 private data class Item(
     val id: Int,
