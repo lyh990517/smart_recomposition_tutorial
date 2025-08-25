@@ -17,16 +17,16 @@ import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.base.Case
 import com.yunho.smartrecompositiontutorial.base.Tutorial
 
-fun NavGraphBuilder.stateLoop() {
-    composable<Route.StateLoop> {
-        StateLoop(
+fun NavGraphBuilder.avoidingBackwardsWrites() {
+    composable<Route.AvoidingBackwardsWrites> {
+        AvoidingBackwardsWrites(
             modifier = Modifier.fillMaxSize()
         )
     }
 }
 
 @Composable
-fun StateLoop(
+fun AvoidingBackwardsWrites(
     modifier: Modifier = Modifier
 ) {
     Tutorial(modifier = modifier) { case ->

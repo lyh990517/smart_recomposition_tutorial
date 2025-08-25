@@ -19,7 +19,8 @@ import com.yunho.smartrecompositiontutorial.cases.advenced.statePassingWithLambd
 import com.yunho.smartrecompositiontutorial.cases.basic.calculationCachingWithRemember
 import com.yunho.smartrecompositiontutorial.cases.basic.donutHoleSkipping
 import com.yunho.smartrecompositiontutorial.cases.basic.positionalMemoization
-import com.yunho.smartrecompositiontutorial.cases.basic.stateLoop
+import com.yunho.smartrecompositiontutorial.cases.basic.AvoidingBackwardsWrites
+import com.yunho.smartrecompositiontutorial.cases.basic.avoidingBackwardsWrites
 
 @Composable
 fun MainNavGraph(
@@ -32,7 +33,7 @@ fun MainNavGraph(
     ) {
         root(navController)
         calculationCachingWithRemember()
-        stateLoop()
+        avoidingBackwardsWrites()
         positionalMemoization()
         donutHoleSkipping()
         statePassing()

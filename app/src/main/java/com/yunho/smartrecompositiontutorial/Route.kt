@@ -17,7 +17,7 @@ sealed interface Route {
     data object Root : Route {
         val navigableRoutes: List<Navigable> = listOf(
             CalculationCachingWithRemember,
-            StateLoop,
+            AvoidingBackwardsWrites,
             PositionalMemoization,
             DonutHoleSkipping,
             StatePassing,
@@ -37,8 +37,8 @@ sealed interface Route {
     }
 
     @Serializable
-    data object StateLoop : Navigable {
-        override val label: String = "State Loop"
+    data object AvoidingBackwardsWrites : Navigable {
+        override val label: String = "Avoiding Backwards Writes"
     }
 
     @Serializable
