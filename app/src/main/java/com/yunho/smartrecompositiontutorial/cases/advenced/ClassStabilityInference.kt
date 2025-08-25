@@ -25,48 +25,48 @@ import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.base.Case
 import com.yunho.smartrecompositiontutorial.base.Tutorial
 
-data class UnstableData(
-    val name: String,
-    val value: Int,
-    val list: List<String>
+data class UnstableData1(
+    val name: String, // stable
+    val value: Int, // stable
+    val list: List<String> // unstable
 )
 
 data class UnstableData2(
-    val name: String,
-    var value: Int,
+    val name: String, // stable
+    var value: Int, // stable
 )
 
 @Stable
-data class StableData(
-    val name: String,
-    val value: Int,
-    val list: List<String>
+data class StableData1(
+    val name: String, // stable
+    val value: Int, // stable
+    val list: List<String> // unstable
 )
 
-data class StableDataWithMutableState(
-    val name: String,
-    val value: Int,
-    val state: MutableState<Int>
+data class StableData2(
+    val name: String, // stable
+    val value: Int, // stable
+    val state: MutableState<Int> // stable
 )
 
-data class StableDataWithMutableState2(
-    val name: String,
-    val value: Int,
+data class StableData3(
+    val name: String, // stable
+    val value: Int, // stable
 ) {
-    var state by mutableIntStateOf(0)
+    var state by mutableIntStateOf(0) // stable
 }
 
-data class StableDataWithState(
-    val name: String,
-    val value: Int,
-    val state: State<Int>
+data class StableData4(
+    val name: String, // stable
+    val value: Int, // stable
+    val state: State<Int> // stable
 )
 
 @Immutable
 data class ImmutableData(
-    val name: String,
-    val value: Int,
-    val list: List<String>
+    val name: String, // stable
+    val value: Int, // stable
+    val list: List<String> // unstable
 )
 
 fun NavGraphBuilder.classStabilityInference() {
@@ -104,15 +104,15 @@ private fun Problem(
 ) {
     var counter by remember { mutableIntStateOf(0) }
     val unstableData = remember {
-        UnstableData(
-            name = "Unstable",
+        UnstableData1(
+            name = "UnstableData1",
             value = 42,
             list = listOf("item1", "item2")
         )
     }
     val unstableData2 = remember {
         UnstableData2(
-            name = "Unstable",
+            name = "UnstableData2",
             value = 42,
         )
     }
@@ -136,12 +136,12 @@ private fun Problem(
         }
 
         // This will recompose even when unstableData hasn't changed
-        UnstableComponent(
+        Unstable1(
             data = unstableData,
             modifier = Modifier.padding(8.dp)
         )
 
-        UnstableComponent2(
+        Unstable2(
             data = unstableData2,
             modifier = Modifier.padding(8.dp)
         )
@@ -153,31 +153,31 @@ private fun Solution(
     modifier: Modifier = Modifier
 ) {
     var counter by remember { mutableIntStateOf(0) }
-    val stableData = remember {
-        StableData(
-            name = "Stable",
+    val stableData1 = remember {
+        StableData1(
+            name = "StableData1",
             value = 42,
             list = listOf("item1", "item2")
         )
     }
-    val stableData1 = remember {
-        StableDataWithState(
-            name = "Stable",
-            value = 42,
-            state = mutableIntStateOf(0)
-        )
-    }
     val stableData2 = remember {
-        StableDataWithMutableState(
-            name = "Stable",
+        StableData2(
+            name = "StableData2",
             value = 42,
             state = mutableIntStateOf(0)
         )
     }
     val stableData3 = remember {
-        StableDataWithMutableState2(
-            name = "Stable",
+        StableData3(
+            name = "StableData3",
             value = 42
+        )
+    }
+    val stableData4 = remember {
+        StableData4(
+            name = "StableData4",
+            value = 42,
+            state = mutableIntStateOf(0)
         )
     }
 
@@ -208,27 +208,27 @@ private fun Solution(
         }
 
         // These won't recompose unnecessarily
-        StableComponent(
-            data = stableData,
-            modifier = Modifier.padding(8.dp)
-        )
-
-        StableComponentWithState(
+        Stable1(
             data = stableData1,
             modifier = Modifier.padding(8.dp)
         )
 
-        StableComponentWithMutableState(
+        Stable2(
             data = stableData2,
             modifier = Modifier.padding(8.dp)
         )
 
-        StableComponentWithMutableState2(
+        Stable3(
             data = stableData3,
             modifier = Modifier.padding(8.dp)
         )
 
-        ImmutableComponent(
+        Stable4(
+            data = stableData4,
+            modifier = Modifier.padding(8.dp)
+        )
+
+        Immutable(
             data = immutableData,
             modifier = Modifier.padding(8.dp)
         )
@@ -236,8 +236,8 @@ private fun Solution(
 }
 
 @Composable
-private fun UnstableComponent(
-    data: UnstableData,
+private fun Unstable1(
+    data: UnstableData1,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -251,7 +251,7 @@ private fun UnstableComponent(
 }
 
 @Composable
-private fun UnstableComponent2(
+private fun Unstable2(
     data: UnstableData2,
     modifier: Modifier = Modifier
 ) {
@@ -265,8 +265,8 @@ private fun UnstableComponent2(
 }
 
 @Composable
-private fun StableComponent(
-    data: StableData,
+private fun Stable1(
+    data: StableData1,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -280,52 +280,52 @@ private fun StableComponent(
 }
 
 @Composable
-private fun StableComponentWithState(
-    data: StableDataWithState,
+private fun Stable2(
+    data: StableData2,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("StableWithState: ${data.name}")
+        Text("Stable: ${data.name}")
         Text("Value: ${data.value}")
         Text("State: ${data.state.value}")
     }
 }
 
 @Composable
-private fun StableComponentWithMutableState(
-    data: StableDataWithMutableState,
+private fun Stable3(
+    data: StableData3,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("StableWithMutableState: ${data.name}")
-        Text("Value: ${data.value}")
-        Text("State: ${data.state.value}")
-    }
-}
-
-@Composable
-private fun StableComponentWithMutableState2(
-    data: StableDataWithMutableState2,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("StableWithMutableState2: ${data.name}")
+        Text("Stable: ${data.name}")
         Text("Value: ${data.value}")
         Text("State: ${data.state}")
     }
 }
 
 @Composable
-private fun ImmutableComponent(
+private fun Stable4(
+    data: StableData4,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Stable: ${data.name}")
+        Text("Value: ${data.value}")
+        Text("State: ${data.state.value}")
+    }
+}
+
+@Composable
+private fun Immutable(
     data: ImmutableData,
     modifier: Modifier = Modifier
 ) {
