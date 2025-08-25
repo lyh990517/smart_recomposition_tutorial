@@ -57,6 +57,8 @@ private fun Problem(
             text = "click this"
         )
 
+        // The moment you call the value of a state,
+        // the composable begins tracking changes to that state, and recomposition occurs based on those changes.
         ChildA(count = count.intValue)
     }
 }
@@ -73,6 +75,8 @@ private fun Solution(
             text = "click this"
         )
 
+        // Since we didn't call the value of the state,
+        // the composable doesn't track the state and no recomposition occurs due to that state.
         ChildB(count = count)
         ChildC(count = count)
     }
@@ -96,7 +100,7 @@ private fun ChildB(
 ) {
     Text(
         modifier = modifier,
-        text = "Count: ${count.value}"
+        text = "Count: ${count.value}" // read state on child
     )
 }
 
@@ -107,6 +111,6 @@ private fun ChildC(
 ) {
     Text(
         modifier = modifier,
-        text = "Count: $count"
+        text = "Count: $count" // Even though the state was passed, value was not called, so recomposition does not occur even if the state changes.
     )
 }
