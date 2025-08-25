@@ -14,6 +14,7 @@ import com.yunho.smartrecompositiontutorial.cases.basic.positionalMemoization
 import com.yunho.smartrecompositiontutorial.cases.basic.stateLoop
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateDelegation
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateDelegationUsingLambda
+import com.yunho.smartrecompositiontutorial.cases.advenced.phaseSkipping
 
 @Composable
 fun MainNavGraph(
@@ -31,6 +32,7 @@ fun MainNavGraph(
         donutHoleSkipping()
         stateDelegation()
         stateDelegationUsingLambda()
+        phaseSkipping()
         stateCalculationWithDerivedStateOf()
         stateCalculationWithSnapshotFlow()
     }
