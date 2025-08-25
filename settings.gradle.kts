@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "smart recomposition tutorial"
 include(":app")
+include(":data")

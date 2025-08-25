@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.yunho.data.DataModel
 import com.yunho.smartrecompositiontutorial.Route
 import com.yunho.smartrecompositiontutorial.base.Case
 import com.yunho.smartrecompositiontutorial.base.Tutorial
@@ -145,6 +146,12 @@ private fun Problem(
             override var value: Int = 42
         }
     }
+    val dataModel = remember {
+        DataModel(
+            name = "DataModel",
+            value = 42,
+        )
+    }
 
     Column(
         modifier = modifier,
@@ -177,6 +184,11 @@ private fun Problem(
 
         Unstable3(
             data = unstableData3,
+            modifier = Modifier.padding(8.dp)
+        )
+
+        DataModel(
+            data = dataModel,
             modifier = Modifier.padding(8.dp)
         )
     }
@@ -358,6 +370,21 @@ private fun Unstable3(
         Text("Value: ${data.value}")
     }
 }
+
+@Composable
+private fun DataModel(
+    data: DataModel,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Unstable: ${data.name}")
+        Text("Value: ${data.value}")
+    }
+}
+
 
 @Composable
 private fun Stable1(
