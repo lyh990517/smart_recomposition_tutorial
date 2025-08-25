@@ -1,4 +1,4 @@
-package com.yunho.smartrecompositiontutorial.cases.basic
+package com.yunho.smartrecompositiontutorial.cases.advenced
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

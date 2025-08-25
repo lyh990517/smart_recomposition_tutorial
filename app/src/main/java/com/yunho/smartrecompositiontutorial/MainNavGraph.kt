@@ -11,16 +11,12 @@ import com.yunho.smartrecompositiontutorial.cases.advenced.contentType
 import com.yunho.smartrecompositiontutorial.cases.advenced.phaseSkipping
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateCalculationWithDerivedStateOf
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateCalculationWithSnapshotFlow
-import com.yunho.smartrecompositiontutorial.cases.advenced.StatePassing
-import com.yunho.smartrecompositiontutorial.cases.advenced.DeferReadsAsLongAsPossible
 import com.yunho.smartrecompositiontutorial.cases.advenced.stateHoisting
 import com.yunho.smartrecompositiontutorial.cases.advenced.statePassing
-import com.yunho.smartrecompositiontutorial.cases.advenced.DeferReadsAsLongAsPossible
 import com.yunho.smartrecompositiontutorial.cases.advenced.deferReadsAsLongAsPossible
 import com.yunho.smartrecompositiontutorial.cases.basic.calculationCachingWithRemember
-import com.yunho.smartrecompositiontutorial.cases.basic.donutHoleSkipping
+import com.yunho.smartrecompositiontutorial.cases.advenced.donutHoleSkipping
 import com.yunho.smartrecompositiontutorial.cases.basic.positionalMemoization
-import com.yunho.smartrecompositiontutorial.cases.basic.AvoidingBackwardsWrites
 import com.yunho.smartrecompositiontutorial.cases.basic.avoidingBackwardsWrites
 
 @Composable
