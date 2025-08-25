@@ -2,6 +2,7 @@ package com.yunho.smartrecompositiontutorial.cases.advenced
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -62,11 +63,23 @@ data class StableData4(
     val state: State<Int> // stable
 )
 
+@Stable
+data class StableData5(
+    val name: String, // stable
+    var value: Int, // stable
+)
+
 @Immutable
-data class ImmutableData(
+data class ImmutableData1(
     val name: String, // stable
     val value: Int, // stable
     val list: List<String> // unstable
+)
+
+@Immutable
+data class ImmutableData2(
+    val name: String, // stable
+    var value: Int, // stable
 )
 
 fun NavGraphBuilder.classStabilityInference() {
@@ -180,12 +193,23 @@ private fun Solution(
             state = mutableIntStateOf(0)
         )
     }
-
-    val immutableData = remember {
-        ImmutableData(
-            name = "Immutable",
+    val stableData5 = remember {
+        StableData5(
+            name = "StableData5",
+            value = 42
+        )
+    }
+    val immutableData1 = remember {
+        ImmutableData1(
+            name = "ImmutableData1",
             value = 42,
             list = listOf("item1", "item2")
+        )
+    }
+    val immutableData2 = remember {
+        ImmutableData2(
+            name = "ImmutableData2",
+            value = 42,
         )
     }
 
@@ -228,8 +252,18 @@ private fun Solution(
             modifier = Modifier.padding(8.dp)
         )
 
-        Immutable(
-            data = immutableData,
+        Stable5(
+            data = stableData5,
+            modifier = Modifier.padding(8.dp)
+        )
+
+        Immutable1(
+            data = immutableData1,
+            modifier = Modifier.padding(8.dp)
+        )
+
+        Immutable2(
+            data = immutableData2,
             modifier = Modifier.padding(8.dp)
         )
     }
@@ -260,7 +294,22 @@ private fun Unstable2(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Unstable: ${data.name}")
-        Text("Value: ${data.value}")
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text("Value: ${data.value}")
+
+            Button(
+                onClick = {
+                    data.value += 2
+                    println("value changed: ${data.value}")
+                }
+            ) {
+                Text(text = "change value")
+            }
+        }
     }
 }
 
@@ -290,7 +339,22 @@ private fun Stable2(
     ) {
         Text("Stable: ${data.name}")
         Text("Value: ${data.value}")
-        Text("State: ${data.state.value}")
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text("State: ${data.state.value}")
+
+            Button(
+                onClick = {
+                    data.state.value += 2
+                    println("value changed: ${data.state.value}")
+                }
+            ) {
+                Text(text = "change value")
+            }
+        }
     }
 }
 
@@ -305,7 +369,22 @@ private fun Stable3(
     ) {
         Text("Stable: ${data.name}")
         Text("Value: ${data.value}")
-        Text("State: ${data.state}")
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text("State: ${data.state}")
+
+            Button(
+                onClick = {
+                    data.state += 2
+                    println("value changed: ${data.state}")
+                }
+            ) {
+                Text(text = "change value")
+            }
+        }
     }
 }
 
@@ -325,8 +404,37 @@ private fun Stable4(
 }
 
 @Composable
-private fun Immutable(
-    data: ImmutableData,
+private fun Stable5(
+    data: StableData5,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Stable: ${data.name}")
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text("Value: ${data.value}")
+
+            Button(
+                onClick = {
+                    data.value += 2
+                    println("value changed: ${data.value}")
+                }
+            ) {
+                Text(text = "change value")
+            }
+        }
+    }
+}
+
+@Composable
+private fun Immutable1(
+    data: ImmutableData1,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -336,5 +444,34 @@ private fun Immutable(
         Text("Immutable: ${data.name}")
         Text("Value: ${data.value}")
         Text("List size: ${data.list.size}")
+    }
+}
+
+@Composable
+private fun Immutable2(
+    data: ImmutableData2,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Immutable: ${data.name}")
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text("Value: ${data.value}")
+
+            Button(
+                onClick = {
+                    data.value += 2
+                    println("value changed: ${data.value}")
+                }
+            ) {
+                Text(text = "change value")
+            }
+        }
     }
 }
