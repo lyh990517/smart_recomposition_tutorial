@@ -51,6 +51,10 @@ fun NavGraphBuilder.classStabilityInference() {
     }
 }
 
+/**
+ * Since Compose 2.0, strong skippable is enabled by default, so even unstable classes are skippable.
+ * However, in this example, we'll disable strong skippable and explore the stability of the class.
+ */
 @Composable
 fun ClassStabilityInference(
     modifier: Modifier = Modifier
