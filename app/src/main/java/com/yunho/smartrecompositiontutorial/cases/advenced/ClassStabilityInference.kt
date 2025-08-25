@@ -37,6 +37,11 @@ data class UnstableData2(
     var value: Int, // stable
 )
 
+interface UnstableData3 {
+    val name: String // stable
+    var value: Int // stable
+}
+
 @Stable
 data class StableData1(
     val name: String, // stable
@@ -68,6 +73,11 @@ data class StableData5(
     val name: String, // stable
     var value: Int, // stable
 )
+
+interface StableData6 {
+    val name: String // stable
+    val value: Int // stable
+}
 
 @Immutable
 data class ImmutableData1(
@@ -129,6 +139,12 @@ private fun Problem(
             value = 42,
         )
     }
+    val unstableData3 = remember {
+        object : UnstableData3 {
+            override val name: String = "UnstableData3"
+            override var value: Int = 42
+        }
+    }
 
     Column(
         modifier = modifier,
@@ -156,6 +172,11 @@ private fun Problem(
 
         Unstable2(
             data = unstableData2,
+            modifier = Modifier.padding(8.dp)
+        )
+
+        Unstable3(
+            data = unstableData3,
             modifier = Modifier.padding(8.dp)
         )
     }
@@ -198,6 +219,12 @@ private fun Solution(
             name = "StableData5",
             value = 42
         )
+    }
+    val stableData6 = remember {
+        object : StableData6 {
+            override val name: String = "StableData6"
+            override val value: Int = 42
+        }
     }
     val immutableData1 = remember {
         ImmutableData1(
@@ -257,6 +284,11 @@ private fun Solution(
             modifier = Modifier.padding(8.dp)
         )
 
+        Stable6(
+            data = stableData6,
+            modifier = Modifier.padding(8.dp)
+        )
+
         Immutable1(
             data = immutableData1,
             modifier = Modifier.padding(8.dp)
@@ -310,6 +342,20 @@ private fun Unstable2(
                 Text(text = "change value")
             }
         }
+    }
+}
+
+@Composable
+private fun Unstable3(
+    data: UnstableData3,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Unstable: ${data.name}")
+        Text("Value: ${data.value}")
     }
 }
 
@@ -429,6 +475,20 @@ private fun Stable5(
                 Text(text = "change value")
             }
         }
+    }
+}
+
+@Composable
+private fun Stable6(
+    data: StableData6,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Stable: ${data.name}")
+        Text("Value: ${data.value}")
     }
 }
 
