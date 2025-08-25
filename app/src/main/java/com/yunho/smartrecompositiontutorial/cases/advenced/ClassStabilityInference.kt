@@ -9,7 +9,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -26,21 +28,45 @@ import com.yunho.smartrecompositiontutorial.base.Tutorial
 data class UnstableData(
     val name: String,
     val value: Int,
-    var mutableList: MutableList<String> = mutableListOf()
+    val list: List<String>
+)
+
+data class UnstableData2(
+    val name: String,
+    var value: Int,
 )
 
 @Stable
 data class StableData(
     val name: String,
     val value: Int,
-    val list: List<String> = emptyList()
+    val list: List<String>
+)
+
+data class StableDataWithMutableState(
+    val name: String,
+    val value: Int,
+    val state: MutableState<Int>
+)
+
+data class StableDataWithMutableState2(
+    val name: String,
+    val value: Int,
+) {
+    var state by mutableIntStateOf(0)
+}
+
+data class StableDataWithState(
+    val name: String,
+    val value: Int,
+    val state: State<Int>
 )
 
 @Immutable
 data class ImmutableData(
     val name: String,
     val value: Int,
-    val list: List<String> = emptyList()
+    val list: List<String>
 )
 
 fun NavGraphBuilder.classStabilityInference() {
@@ -81,7 +107,13 @@ private fun Problem(
         UnstableData(
             name = "Unstable",
             value = 42,
-            mutableList = mutableListOf("item1", "item2")
+            list = listOf("item1", "item2")
+        )
+    }
+    val unstableData2 = remember {
+        UnstableData2(
+            name = "Unstable",
+            value = 42,
         )
     }
 
@@ -108,6 +140,11 @@ private fun Problem(
             data = unstableData,
             modifier = Modifier.padding(8.dp)
         )
+
+        UnstableComponent2(
+            data = unstableData2,
+            modifier = Modifier.padding(8.dp)
+        )
     }
 }
 
@@ -121,6 +158,26 @@ private fun Solution(
             name = "Stable",
             value = 42,
             list = listOf("item1", "item2")
+        )
+    }
+    val stableData1 = remember {
+        StableDataWithState(
+            name = "Stable",
+            value = 42,
+            state = mutableIntStateOf(0)
+        )
+    }
+    val stableData2 = remember {
+        StableDataWithMutableState(
+            name = "Stable",
+            value = 42,
+            state = mutableIntStateOf(0)
+        )
+    }
+    val stableData3 = remember {
+        StableDataWithMutableState2(
+            name = "Stable",
+            value = 42
         )
     }
 
@@ -156,6 +213,21 @@ private fun Solution(
             modifier = Modifier.padding(8.dp)
         )
 
+        StableComponentWithState(
+            data = stableData1,
+            modifier = Modifier.padding(8.dp)
+        )
+
+        StableComponentWithMutableState(
+            data = stableData2,
+            modifier = Modifier.padding(8.dp)
+        )
+
+        StableComponentWithMutableState2(
+            data = stableData3,
+            modifier = Modifier.padding(8.dp)
+        )
+
         ImmutableComponent(
             data = immutableData,
             modifier = Modifier.padding(8.dp)
@@ -168,15 +240,27 @@ private fun UnstableComponent(
     data: UnstableData,
     modifier: Modifier = Modifier
 ) {
-    println("UnstableComponent recomposed with: ${data.name}")
-
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Unstable: ${data.name}")
         Text("Value: ${data.value}")
-        Text("List size: ${data.mutableList.size}")
+        Text("List size: ${data.list.size}")
+    }
+}
+
+@Composable
+private fun UnstableComponent2(
+    data: UnstableData2,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Unstable: ${data.name}")
+        Text("Value: ${data.value}")
     }
 }
 
@@ -185,8 +269,6 @@ private fun StableComponent(
     data: StableData,
     modifier: Modifier = Modifier
 ) {
-    println("StableComponent recomposed with: ${data.name}")
-
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -198,12 +280,55 @@ private fun StableComponent(
 }
 
 @Composable
+private fun StableComponentWithState(
+    data: StableDataWithState,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("StableWithState: ${data.name}")
+        Text("Value: ${data.value}")
+        Text("State: ${data.state.value}")
+    }
+}
+
+@Composable
+private fun StableComponentWithMutableState(
+    data: StableDataWithMutableState,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("StableWithMutableState: ${data.name}")
+        Text("Value: ${data.value}")
+        Text("State: ${data.state.value}")
+    }
+}
+
+@Composable
+private fun StableComponentWithMutableState2(
+    data: StableDataWithMutableState2,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("StableWithMutableState2: ${data.name}")
+        Text("Value: ${data.value}")
+        Text("State: ${data.state}")
+    }
+}
+
+@Composable
 private fun ImmutableComponent(
     data: ImmutableData,
     modifier: Modifier = Modifier
 ) {
-    println("ImmutableComponent recomposed with: ${data.name}")
-
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
